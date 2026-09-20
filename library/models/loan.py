@@ -1,14 +1,24 @@
+from sqlalchemy import String
+from sqlalchemy.orm import Mapped, mapped_column
+from datetime import date
 
-class Loan:
-    def __init__(self, book, user, loan_date ):
-        self.book = book
-        self.user = user
-        self.loan_date = loan_date
 
-    def show_info(self):
-            print(f"Livro emprestado: {self.book}")
-            print(f"Usuário: {self.user}")
-            print(f"Data de devolução: {self.loan_date}")
+from base import Base 
+
+
+class Loan(Base):
+    __tablename__ = "loan"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user: Mapped[str] = mapped_column(String(200), nullable=False)
+    email: Mapped[str] = mapped_column(String(200), nullable=False)
+    livro: Mapped[str] = mapped_column(String(200), nullable=False)
+    devolucao: Mapped[date] = mapped_column(nullable=False)
+  
+
+   # def show_info(self):
+            #print(f"Livro emprestado: {self.book}")
+            #print(f"Usuário: {self.user}")
+            #print(f"Data de devolução: {self.loan_date}")
 
 
 
