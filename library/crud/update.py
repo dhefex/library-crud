@@ -5,25 +5,25 @@ from database import SessionLocal
 from database import sessionmaker
 from datetime import datetime
 
-
+# Atualizando informações
 def update_book(id):
-
     session = SessionLocal()
+    # Buscando o ID do livro
     livro = session.get(Book, id)
 
+     # Verificando
     if livro:
-        print(f"\nLivro atual: {livro.title}")
-
+        print(f"\nLivro atual: {livro.titulo}")
 
         novo_titulo = input("Novo título: ")
-        novo_autor = input("Novo autor:")
+        novo_autor = input("Novo autor: ")
         novo_isbn = input("Novo ISBN: ")
         novo_ano = input("Novo ano: ")
 
-        livro.title = novo_titulo
-        novo_autor = novo_autor
-        novo_isbn = novo_isbn
-        novo_ano = novo_ano
+        livro.titulo= novo_titulo
+        livro.autor = novo_autor
+        livro.isbn= novo_isbn
+        livro.ano = novo_ano
 
         session.commit()
 
@@ -32,7 +32,7 @@ def update_book(id):
     else:
         print("Livro não foi encontrado")
 
-
+    session.close()
 
 def update_loan(id):
     session = SessionLocal()
@@ -40,86 +40,63 @@ def update_loan(id):
     loan = session.get(Loan, id)
 
     if loan:
-        print("\nInformações atuais: ")
+        print("\nInformações atuais:")
         print(f"ID: {loan.id}")
         print(f"Livro: {loan.livro}")
         print(f"Usuário: {loan.user}")
         print(f"E-mail: {loan.email}")
         print(f"Devolução: {loan.devolucao}")
 
-        novo_id= int(input("Digite o novo ID do usuário: "))
-        novo_user = input("Digite o novo  usuário: ")
-        novo_email = input("Digite o novo email do usuário:")
-        loan_livro = input("Livro que será emprestado")
-        devolucao = input("Data de devolucao")
-        devolucao = datetime.strptime(devolucao,"%d%m%Y")
+        novo_user = input("Digite o novo usuário: ")
+        novo_email = input("Digite o novo email do usuário: ")
+        novo_livro = input("Livro que será emprestado: ")
+        devolucao = input("Data de devolução (DDMMAAAA): ")
 
-        loan.id= int(novo_id)
+        devolucao = datetime.strptime(devolucao, "%d%m%Y")
+
         loan.user = novo_user
         loan.email = novo_email
+        loan.livro = novo_livro
         loan.devolucao = devolucao
 
         session.commit()
 
-        print("Empréstimo atualizado")
+        print("Empréstimo atualizado!")
 
     else:
         print("Empréstimo não encontrado!")
 
+    session.close()
+
 def update_user(id):
     session = SessionLocal()
 
-    users = session.get(User, id)
+    user = session.get(User, id)
 
-    if users:
+    if user:
         print("\nInformações atuais")
-        print(f"ID: {User.id}")
-        print(f"Usuário: {User.user}")
-        print(f"E-mail: {User.email}")
+        print(f"ID: {user.id}")
+        print(f"Usuário: {user.user}")
+        print(f"E-mail: {user.email}")
 
-        novo_id = int(input("Digite o novo id do usuário: "))
         novo_user = input("Digite um novo usuário: ")
         novo_email = input("Digite um novo email: ")
 
-        users.user = novo_user
-        users.id = int(novo_id)
-        users.email = novo_email
+        user.user = novo_user
+        user.email = novo_email
 
         session.commit()
 
-        print("Usuário não encontrado atualizado!")
+        print("Usuário atualizado com sucesso!")
 
     else:
         print("Usuário não encontrado!")
 
+    session.close()
 
-def menu():
-    while True:
-        print("\nMENU")
-        print("1 - Atualizar Livro")
-        print("2 - Atualizar empréstimo")
-        print("3 - Atualizar usuário")
 
-        choose = input("Escolha uma das opções: ")
 
-        if not choose:
-            print("Esse campo não pode ficar vazio!")
-            continue
 
-        elif choose == "1":
-            update_book(id)
-
-        elif choose == "2":
-            update_loan(id)
-
-        elif choose == "3":
-            update_user(id)
-
-        else:
-            print("Valor inválido, tente novamente!")
-
-# menu()
-        
 
 
 

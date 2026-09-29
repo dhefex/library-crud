@@ -4,10 +4,11 @@ from sqlalchemy.orm import Mapped, mapped_column
 from base import Base
 
 
-
+# Modulo responsável em armazenar as informações do livro
 class Book(Base):
+    # Criando a tabela
     __tablename__ = "books"
-
+    # Valores e tipos
     id: Mapped[int] = mapped_column(primary_key=True)
     titulo: Mapped[str] = mapped_column(String(200), nullable=False)
     autor: Mapped[str] = mapped_column(String(200), nullable=False)

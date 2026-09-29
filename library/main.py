@@ -4,6 +4,7 @@ from database import engine, SessionLocal
 from models.book import Book
 from models.loan import Loan
 from models.users import User
+from crud.remove import remove_book
 from crud.update import update_book
 from crud.update import update_loan
 from crud.update import update_user
@@ -180,39 +181,47 @@ def menu():
                 elif option == "3":
                     read_users()
 
-                else:
-                    print("Opção inválida, tente novamente")
 
 
         elif choose == "5":
             while True:
-                print("1 - Atualizar Livro")
-                print("2 - Atualizar emprestimos")
+                print("1 - Atualizar livros")
+                print("2 - Atualizar empréstimos")
                 print("3 - Atualizar Usuários")
 
-                option = input("Qual informação você deseja ver?:")
+                option = input("Qual opção informação você deseja atualizar?")
 
                 if not option:
-                    print("Esse campo não pode ficar vazio!")
+                    print("Esse campo não pode ficar vazio")
                     continue
 
                 elif option == "1":
-                    update_book(id)
+                    id_livro = int(input("Digite o ID do livro:"))
+                    update_book(id_livro)
 
                 elif option == "2":
-                    update_loan(id)
+                    id_emprestimos = int(input("Digite o ID do empréstimo: "))
+                    update_loan(id_emprestimos)
 
                 elif option == "3":
-                    update_user(id)
+                    id_user = int(input("Digite o ID do usuário: "))
+                    update_user(id_user)
 
                 else:
-                    print("Opção inválida, Por favor tente novamente!")
-            
+                    print("Opção inválida tente novamente!")
+          
 
 
-        else:
-            print("Opção inválida!")
-            
+            else:
+                print("Opção inválida!")
+
+
+        elif choose == "6":
+            remove_book()
+
+
+
+         
 
 menu()
 

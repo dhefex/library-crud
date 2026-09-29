@@ -5,7 +5,7 @@ from datetime import date
 
 from base import Base 
 
-
+# Modulo responsável em armazenar informações dos emprestímos
 class Loan(Base):
     __tablename__ = "loan"
     id: Mapped[int] = mapped_column(primary_key=True)
