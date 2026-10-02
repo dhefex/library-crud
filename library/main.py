@@ -11,6 +11,9 @@ from crud.update import update_user
 from crud.read import read_book
 from crud.read import read_loan
 from crud.read import read_users
+from crud.remove import remove_book
+from crud.remove import remove_loan
+from crud.remove import remove_users
 from sqlalchemy.exc import IntegrityError
 
 Base.metadata.create_all(engine)
@@ -212,16 +215,35 @@ def menu():
           
 
 
-            else:
-                print("Opção inválida!")
+           
 
 
         elif choose == "6":
-            remove_book()
+            while True:
+                print("1  - Excluir livros")
+                print("2  - Excluir empréstimos")
+                print("3  - Excluir Usuários")
+
+                op = input("Quais das opções deseja excluir?:")
+
+                if op == "1":
+                    remove_book()
+
+                elif op == "2":
+                    remove_loan()
+
+                elif op == "3":
+                    remove_users()
+
+                else:
+                    print("Opção inválida, tente novamente")
 
 
 
-         
+        else:
+            print("Erro, tente novamente!")
+
+
 
 menu()
 

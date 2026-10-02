@@ -24,19 +24,21 @@ def remove_book():
 
         else:
             print("Livro não foi encontrado!")
-            continue
+            
 
         # Gerenciamento
         while True:
-            choose = input("Deseja sair continuar ou sair?")
-            print("Y or N")
+            choose = input("Deseja sair continuar ou sair? (Y/N): ")
+        
 
-            if choose in ["yes","y","Y"]:
+            if choose in ["n","no","N"]:
+                print("Aplicação rodando")
                 break
 
-            elif choose in ["not","n","N"]:
-                print("Aplicação rodando")
-                continue
+            elif choose in ["yes","y","Y"]:
+                print("Bye Bye...")
+                return
+                
 
             else:
                 print("Erro, opção inválida!")
@@ -50,7 +52,7 @@ def remove_loan():
         ).first()
 
         if loans:
-            session.delete(Loan)
+            session.delete(loans)
             session.commit()
             print("Empréstimo excluído")
 
@@ -63,11 +65,12 @@ def remove_loan():
             print("Y or N")
         
             if choose in ["yes","y","Y"]:
+                print("Bye Bye...")
                 break
 
             elif choose in ["not","n","N"]:
                 print("Aplicação rodando")
-                continue
+                return
 
             else:
                 print("Erro, opção inválida!")
@@ -82,7 +85,7 @@ def remove_users():
         ).first()
 
         if users:
-            session.delete(User)
+            session.delete(users)
             session.commit()
             print("Usuário removido com sucesso!")
 
@@ -96,11 +99,12 @@ def remove_users():
             print("Y or N")
 
             if choose in ["yes","y","Y"]:
+                print("Bye Bye...")
                 break
 
-            elif choose in ["not","n","N"]:
+            elif choose in ["no","n","N"]:
                 print("Aplicação rodando")
-                continue
+                return
 
             else:
                 print("Erro, opção inválida!")
